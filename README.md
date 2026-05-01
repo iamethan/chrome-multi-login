@@ -1,6 +1,6 @@
 # Multi-Login Session Isolator
 
-Isolate login sessions per tab — log into the same website with multiple accounts simultaneously, without interference. An Edge browser extension similar to SessionBox.
+Isolate login sessions per tab — log into the same website with multiple accounts simultaneously, without interference. An Chrome browser or Edge browser extension similar to SessionBox.
 
 ## Features
 
