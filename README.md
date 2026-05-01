@@ -1,3 +1,4 @@
+@@ -0,0 +1,82 @@
 # Multi-Login Session Isolator
 
 每个标签页拥有独立的登录态，同一网站可同时登录多个账号，互不干扰。类似 SessionBox 的 Edge 浏览器扩展。
