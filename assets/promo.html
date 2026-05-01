@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 440px; height: 280px; overflow: hidden; font-family: 'Segoe UI', system-ui, sans-serif; }
+  .card {
+    width: 440px; height: 280px;
+    background: linear-gradient(135deg, #0d4ebf 0%, #0052cc 40%, #2684ff 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .card::after {
+    content: ''; position: absolute; bottom: -40px; left: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .icon-row {
+    display: flex; gap: 8px; margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .tab {
+    width: 64px; height: 48px; border-radius: 8px 8px 0 0;
+    background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #fff; font-weight: 700;
+  }
+  .tab.active { background: rgba(255,255,255,0.95); color: #0d4ebf; }
+  h1 {
+    color: #fff; font-size: 26px; font-weight: 700; letter-spacing: -0.5px;
+    position: relative; z-index: 1; margin-bottom: 8px;
+  }
+  .tagline {
+    color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 400;
+    position: relative; z-index: 1;
+  }
+  .features {
+    display: flex; gap: 24px; margin-top: 20px; position: relative; z-index: 1;
+  }
+  .feat {
+    display: flex; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.9); font-size: 11px;
+  }
+  .feat-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #4fc3f7;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon-row">
+    <div class="tab active">A</div>
+    <div class="tab">B</div>
+    <div class="tab">C</div>
+  </div>
+  <h1>Multi-Login</h1>
+  <div class="tagline">每个标签页，独立登录态</div>
+  <div class="features">
+    <div class="feat"><div class="feat-dot"></div>Cookie 隔离</div>
+    <div class="feat"><div class="feat-dot"></div>一键新建</div>
+    <div class="feat"><div class="feat-dot"></div>数据安全</div>
+  </div>
+</div>
+</body>
+</html>

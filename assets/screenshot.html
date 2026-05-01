@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1280px; height: 800px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #1a1a2e;
+    overflow: hidden;
+  }
+  .browser {
+    width: 1280px; height: 800px;
+    background: #f0f2f5;
+    display: flex; flex-direction: column;
+  }
+  /* Title bar */
+  .titlebar {
+    height: 36px; background: #202225;
+    display: flex; align-items: center; padding: 0 12px; gap: 8px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .titlebar-text { color: #888; font-size: 12px; margin-left: 12px; }
+  /* Tab bar */
+  .tabbar {
+    height: 40px; background: #2b2d31;
+    display: flex; align-items: flex-end; padding: 0 8px;
+  }
+  .btab {
+    height: 34px; padding: 0 20px;
+    background: #41434a; color: #ccc; font-size: 12px;
+    display: flex; align-items: center; gap: 8px;
+    border-radius: 8px 8px 0 0; cursor: pointer;
+  }
+  .btab.active { background: #f0f2f5; color: #333; }
+  .btab .badge {
+    background: #0d4ebf; color: #fff; font-size: 9px;
+    padding: 1px 6px; border-radius: 8px; font-weight: 600;
+  }
+  /* Address bar */
+  .addrbar {
+    height: 44px; background: #fff; display: flex; align-items: center;
+    padding: 0 16px; gap: 12px; border-bottom: 1px solid #e0e0e0;
+  }
+  .addr-input {
+    flex: 1; height: 30px; background: #f0f2f5; border-radius: 15px;
+    padding: 0 16px; font-size: 13px; color: #555;
+    display: flex; align-items: center;
+  }
+  .ext-icon {
+    width: 28px; height: 28px; background: #0d4ebf; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 14px;
+  }
+  /* Content area */
+  .content-area {
+    flex: 1; display: flex; padding: 24px; gap: 24px;
+  }
+  /* Left: simulated website */
+  .website {
+    flex: 1; background: #fff; border-radius: 12px; padding: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .site-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #eee;
+  }
+  .site-logo { display: flex; align-items: center; gap: 10px; }
+  .site-logo-circle { width: 32px; height: 32px; background: #e8f0fe; border-radius: 8px; }
+  .site-logo-text { font-size: 16px; font-weight: 600; color: #333; }
+  .user-info { display: flex; align-items: center; gap: 8px; }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 600; font-size: 14px;
+  }
+  .avatar.a1 { background: #4285f4; }
+  .username { font-size: 13px; color: #555; }
+  .site-body h2 { font-size: 20px; color: #222; margin-bottom: 12px; }
+  .site-body p { font-size: 13px; color: #666; line-height: 1.8; }
+  .mock-card {
+    margin-top: 20px; padding: 16px; background: #f8f9fa;
+    border-radius: 8px; border: 1px solid #e8eaed;
+  }
+  .mock-card-label { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 6px; }
+  .mock-card-val { font-size: 18px; font-weight: 600; color: #333; }
+  /* Right: extension popup */
+  .popup {
+    width: 320px; background: #fff; border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15); overflow: hidden; flex-shrink: 0;
+  }
+  .popup-header {
+    background: linear-gradient(135deg, #0d4ebf, #2684ff);
+    padding: 16px; color: #fff; text-align: center;
+  }
+  .popup-header h3 { font-size: 15px; font-weight: 600; }
+  .popup-header p { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+  .popup-body { padding: 16px; }
+  .popup-section-title {
+    font-size: 11px; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 8px;
+  }
+  .popup-session {
+    padding: 10px 12px; border: 1px solid #e0e3e8; border-radius: 8px;
+    margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .popup-session.active { border-color: #0d4ebf; background: #f0f5ff; }
+  .popup-sess-name { font-size: 13px; font-weight: 500; color: #333; }
+  .popup-sess-meta { font-size: 11px; color: #888; }
+  .popup-sess-badge {
+    font-size: 10px; background: #e8f0fe; color: #0d4ebf;
+    padding: 2px 8px; border-radius: 10px; font-weight: 500;
+  }
+  .popup-btns { display: flex; gap: 8px; margin-top: 12px; }
+  .popup-btn {
+    flex: 1; padding: 8px; border: none; border-radius: 6px;
+    font-size: 12px; font-weight: 500; cursor: pointer; text-align: center;
+  }
+  .popup-btn.primary { background: #0d4ebf; color: #fff; }
+  .popup-btn.danger { background: #fce8ea; color: #c41e3a; }
+  /* Bottom annotation */
+  .annotation {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.7); color: #fff; padding: 8px 20px;
+    border-radius: 20px; font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="titlebar">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <span class="titlebar-text">Multi-Login Session Isolator — 演示</span>
+  </div>
+  <div class="tabbar">
+    <div class="btab active">
+      <span>example.com</span>
+      <span class="badge">账号 A</span>
+    </div>
+    <div class="btab">
+      <span>example.com</span>
+      <span class="badge">账号 B</span>
+    </div>
+    <div class="btab">
+      <span>example.com</span>
+      <span class="badge">账号 C</span>
+    </div>
+  </div>
+  <div class="addrbar">
+    <div class="ext-icon">M</div>
+    <div class="addr-input">🔒 https://www.example.com/dashboard</div>
+  </div>
+  <div class="content-area">
+    <div class="website">
+      <div class="site-header">
+        <div class="site-logo">
+          <div class="site-logo-circle"></div>
+          <span class="site-logo-text">Example App</span>
+        </div>
+        <div class="user-info">
+          <span class="username">张三 (zhangsan@mail.com)</span>
+          <div class="avatar a1">张</div>
+        </div>
+      </div>
+      <div class="site-body">
+        <h2>欢迎回来，张三</h2>
+        <p>这是你的个人工作台。当前登录账号为张三，所有数据与其它标签页完全隔离。</p>
+        <div class="mock-card">
+          <div class="mock-card-label">当前 Session</div>
+          <div class="mock-card-val">账号 A — zhangsan@mail.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="popup">
+      <div class="popup-header">
+        <h3>Multi-Login Session Isolator</h3>
+        <p>标签页独立登录态管理</p>
+      </div>
+      <div class="popup-body">
+        <div class="popup-section-title">当前标签页</div>
+        <div class="popup-session active">
+          <div>
+            <div class="popup-sess-name">账号 A</div>
+            <div class="popup-sess-meta">example.com</div>
+          </div>
+          <span class="popup-sess-badge">当前</span>
+        </div>
+        <div class="popup-section-title" style="margin-top:12px">活跃 Sessions</div>
+        <div class="popup-session">
+          <div>
+            <div class="popup-sess-name">账号 B</div>
+            <div class="popup-sess-meta">example.com</div>
+          </div>
+          <span style="font-size:11px;color:#aaa">#2</span>
+        </div>
+        <div class="popup-session">
+          <div>
+            <div class="popup-sess-name">账号 C</div>
+            <div class="popup-sess-meta">example.com</div>
+          </div>
+          <span style="font-size:11px;color:#aaa">#3</span>
+        </div>
+        <div class="popup-btns">
+          <div class="popup-btn danger">重置登录态</div>
+          <div class="popup-btn primary">新建隔离标签</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
