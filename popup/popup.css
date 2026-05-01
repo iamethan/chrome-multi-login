@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  color: #1a1a1a;
+  background: #f7f8fa;
+}
+
+.container {
+  padding: 16px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e3e8;
+}
+
+header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0d4ebf;
+}
+
+.subtitle {
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}
+
+h2 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Current Session */
+.current-session {
+  margin-bottom: 16px;
+}
+
+.name-row {
+  display: flex;
+  gap: 6px;
+}
+
+#sessionName {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#sessionName:focus {
+  border-color: #0d4ebf;
+}
+
+#renameBtn {
+  padding: 6px 12px;
+  background: #0d4ebf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#renameBtn:hover {
+  background: #0a3d99;
+}
+
+.session-id {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 4px;
+  font-family: monospace;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: #0d4ebf;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0a3d99;
+}
+
+.btn-danger {
+  background: #e8ebee;
+  color: #c41e3a;
+}
+
+.btn-danger:hover {
+  background: #c41e3a;
+  color: white;
+}
+
+/* Session List */
+.session-list {
+  border-top: 1px solid #e0e3e8;
+  padding-top: 12px;
+}
+
+.list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: white;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  transition: border-color 0.15s;
+}
+
+.list-item:hover {
+  border-color: #0d4ebf;
+}
+
+.list-item.active {
+  border-color: #0d4ebf;
+  background: #f0f5ff;
+}
+
+.item-name {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.item-meta {
+  font-size: 10px;
+  color: #888;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #aaa;
+  padding: 16px;
+  font-size: 12px;
+}

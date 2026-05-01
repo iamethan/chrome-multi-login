@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=320">
+  <link rel="stylesheet" href="popup.css">
+  <title>Multi-Login</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Multi-Login Session Isolator</h1>
+      <p class="subtitle">标签页独立登录态管理</p>
+    </header>
+
+    <section class="current-session">
+      <h2>当前标签页</h2>
+      <div class="session-info">
+        <label>Session 名称</label>
+        <div class="name-row">
+          <input type="text" id="sessionName" placeholder="Session 名称">
+          <button id="renameBtn" title="保存">✓</button>
+        </div>
+        <div class="session-id" id="sessionId"></div>
+      </div>
+      <div class="actions">
+        <button id="resetBtn" class="btn btn-danger">重置登录态</button>
+        <button id="newTabBtn" class="btn btn-primary">新建隔离标签</button>
+      </div>
+    </section>
+
+    <section class="session-list">
+      <h2>活跃 Sessions</h2>
+      <div id="sessionList" class="list"></div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
